@@ -1,7 +1,6 @@
 # HiddenString
 
-[![Linux Build Status](https://travis-ci.org/paragonie/hidden-string.svg?branch=master)](https://travis-ci.org/paragonie/hidden-string)
-[![Windows Build Status](https://ci.appveyor.com/api/projects/status/itcx1vgmfqiawgbe?svg=true)](https://ci.appveyor.com/project/paragonie-scott/sodium-compat)
+[![Build Status](https://travis-ci.org/paragonie/hidden-string.svg?branch=master)](https://travis-ci.org/paragonie/hidden-string)
 [![Latest Stable Version](https://poser.pugx.org/paragonie/hidden-string/v/stable)](https://packagist.org/packages/paragonie/hidden-string)
 [![Latest Unstable Version](https://poser.pugx.org/paragonie/hidden-string/v/unstable)](https://packagist.org/packages/paragonie/hidden-string)
 [![License](https://poser.pugx.org/paragonie/hidden-string/license)](https://packagist.org/packages/paragonie/hidden-string)
