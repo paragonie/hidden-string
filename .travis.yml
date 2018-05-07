@@ -1,0 +1,36 @@
+language: php
+sudo: false
+
+matrix:
+  fast_finish: true
+  include:
+    - php: "7.0"
+      os: linux
+      env: CHECK_MBSTRING=1
+    - php: "7.1"
+      os: linux
+      env: CHECK_MBSTRING=1
+    - php: "7.2"
+      os: linux
+      env: CHECK_MBSTRING=0
+    - php: "nightly"
+      os: linux
+      env: CHECK_MBSTRING=0
+    - php: "master"
+      os: linux
+      env: CHECK_MBSTRING=0
+    - php: "hhvm"
+      os: linux
+      env: CHECK_MBSTRING=1
+  allow_failures:
+    - php: "master"
+    - php: "hhvm"
+
+install:
+    - composer self-update
+    - composer update
+
+script:
+    - vendor/bin/phpunit
+    - if [[ $CHECK_MBSTRING -eq 1 ]]; then php -dmbstring.func_overload=7 vendor/bin/phpunit; fi
+    - vendor/bin/psalm
