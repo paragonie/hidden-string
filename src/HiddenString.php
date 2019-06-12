@@ -58,12 +58,7 @@ final class HiddenString
         $this->disallowSerialization = $disallowSerialization;
     }
 
-    /**
-     * @param HiddenString $other
-     * @return bool
-     * @throws \TypeError
-     */
-    public function equals(HiddenString $other)
+    public function equals(HiddenString $other): bool
     {
         return \hash_equals(
             $this->getString(),
@@ -73,10 +68,8 @@ final class HiddenString
 
     /**
      * Hide its internal state from var_dump()
-     *
-     * @return array
      */
-    public function __debugInfo()
+    public function __debugInfo(): array
     {
         return [
             'internalStringValue' =>
@@ -113,9 +106,6 @@ final class HiddenString
 
     /**
      * Explicit invocation -- get the raw string value
-     *
-     * @return string
-     * @throws \TypeError
      */
     public function getString(): string
     {
@@ -125,9 +115,6 @@ final class HiddenString
     /**
      * Returns a copy of the string's internal value, which should be zeroed.
      * Optionally, it can return an empty string.
-     *
-     * @return string
-     * @throws \TypeError
      */
     public function __toString(): string
     {
@@ -137,9 +124,6 @@ final class HiddenString
         return '';
     }
 
-    /**
-     * @return array
-     */
     public function __sleep(): array
     {
         if (!$this->disallowSerialization) {
@@ -155,10 +139,6 @@ final class HiddenString
     /**
      * PHP 7 uses interned strings. We don't want altering this one to alter
      * the original string.
-     *
-     * @param string $string
-     * @return string
-     * @throws \TypeError
      */
     public static function safeStrcpy(string $string): string
     {
