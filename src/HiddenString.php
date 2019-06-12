@@ -41,12 +41,7 @@ final class HiddenString
     private $disallowSerialization;
 
     /**
-     * HiddenString constructor.
-     * @param string $value
-     * @param bool $disallowInline
-     * @param bool $disallowSerialization
-     *
-     * @throws \TypeError
+     * @deprecated Please use one of the static factory methods.
      */
     public function __construct(
         string $value,
@@ -56,6 +51,38 @@ final class HiddenString
         $this->internalStringValue = self::safeStrcpy($value);
         $this->disallowInline = $disallowInline;
         $this->disallowSerialization = $disallowSerialization;
+    }
+
+    /**
+     * Create an instance that does not allow inlining and serialization.
+     */
+    public static function create(string $value): self
+    {
+        return new self($value, true, true);
+    }
+
+    /**
+     * Create an instance that supports casting to string.
+     */
+    public static function createInlineable(string $value): self
+    {
+        return new self($value, false, true);
+    }
+
+    /**
+     * Create an instance that can be serialized.
+     */
+    public static function createSerializable(string $value): self
+    {
+        return new self($value, true, false);
+    }
+
+    /**
+     * Create an instance that can be cast to string and be serialized.
+     */
+    public static function createOpen(string $value): self
+    {
+        return new self($value, false, false);
     }
 
     public function equals(HiddenString $other): bool
