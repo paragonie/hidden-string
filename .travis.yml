@@ -13,18 +13,25 @@ matrix:
     - php: "7.2"
       os: linux
       env: CHECK_MBSTRING=0
+    - php: "7.3"
+      os: linux
+      env: CHECK_MBSTRING=0
+    - php: "7.4"
+      os: linux
+      env: CHECK_MBSTRING=0
+    - php: "8.0"
+      os: linux
+      env: CHECK_MBSTRING=0
     - php: "nightly"
       os: linux
       env: CHECK_MBSTRING=0
     - php: "master"
       os: linux
       env: CHECK_MBSTRING=0
-    - php: "hhvm"
-      os: linux
-      env: CHECK_MBSTRING=1
   allow_failures:
+    - php: "8.0"
+    - php: "nightly"
     - php: "master"
-    - php: "hhvm"
 
 install:
     - composer self-update
