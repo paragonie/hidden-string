@@ -120,10 +120,13 @@ final class HiddenString
             } catch (\Throwable $ex) {
             }
         }
+        if (is_null($this->internalStringValue)) {
+            return;
+        }
 
         // Last-ditch attempt to wipe existing values if libsodium is not
         // available. Don't rely on this.
-        $zero = \str_repeat("\0", (int) Binary::safeStrlen($this->internalStringValue));
+        $zero = \str_repeat("\0", Binary::safeStrlen($this->internalStringValue));
         $this->internalStringValue = $this->internalStringValue ^ (
             $zero ^ $this->internalStringValue
         );
