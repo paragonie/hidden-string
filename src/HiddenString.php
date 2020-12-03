@@ -24,29 +24,24 @@ final class HiddenString
     /**
      * @var string
      */
-    protected $internalStringValue = '';
+    private $internalStringValue;
 
     /**
      * Disallow the contents from being accessed via __toString()?
      *
      * @var bool
      */
-    protected $disallowInline = false;
+    private $disallowInline;
 
     /**
      * Disallow the contents from being accessed via __sleep()?
      *
      * @var bool
      */
-    protected $disallowSerialization = false;
+    private $disallowSerialization;
 
     /**
-     * HiddenString constructor.
-     * @param string $value
-     * @param bool $disallowInline
-     * @param bool $disallowSerialization
-     *
-     * @throws \TypeError
+     * @deprecated Please use one of the static factory methods.
      */
     public function __construct(
         string $value,
@@ -59,11 +54,38 @@ final class HiddenString
     }
 
     /**
-     * @param HiddenString $other
-     * @return bool
-     * @throws \TypeError
+     * Create an instance that does not allow inlining and serialization.
      */
-    public function equals(HiddenString $other)
+    public static function create(string $value): self
+    {
+        return new self($value, true, true);
+    }
+
+    /**
+     * Create an instance that supports casting to string.
+     */
+    public static function createInlineable(string $value): self
+    {
+        return new self($value, false, true);
+    }
+
+    /**
+     * Create an instance that can be serialized.
+     */
+    public static function createSerializable(string $value): self
+    {
+        return new self($value, true, false);
+    }
+
+    /**
+     * Create an instance that can be cast to string and be serialized.
+     */
+    public static function createOpen(string $value): self
+    {
+        return new self($value, false, false);
+    }
+
+    public function equals(HiddenString $other): bool
     {
         return \hash_equals(
             $this->getString(),
@@ -73,10 +95,8 @@ final class HiddenString
 
     /**
      * Hide its internal state from var_dump()
-     *
-     * @return array
      */
-    public function __debugInfo()
+    public function __debugInfo(): array
     {
         return [
             'internalStringValue' =>
@@ -116,9 +136,6 @@ final class HiddenString
 
     /**
      * Explicit invocation -- get the raw string value
-     *
-     * @return string
-     * @throws \TypeError
      */
     public function getString(): string
     {
@@ -128,9 +145,6 @@ final class HiddenString
     /**
      * Returns a copy of the string's internal value, which should be zeroed.
      * Optionally, it can return an empty string.
-     *
-     * @return string
-     * @throws \TypeError
      */
     public function __toString(): string
     {
@@ -140,9 +154,6 @@ final class HiddenString
         return '';
     }
 
-    /**
-     * @return array
-     */
     public function __sleep(): array
     {
         if (!$this->disallowSerialization) {
@@ -158,10 +169,6 @@ final class HiddenString
     /**
      * PHP 7 uses interned strings. We don't want altering this one to alter
      * the original string.
-     *
-     * @param string $string
-     * @return string
-     * @throws \TypeError
      */
     public static function safeStrcpy(string $string): string
     {
