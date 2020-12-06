@@ -31,14 +31,14 @@ final class HiddenString
      *
      * @var bool
      */
-    protected $disallowInline = false;
+    protected $disallowInline = true;
 
     /**
      * Disallow the contents from being accessed via __sleep()?
      *
      * @var bool
      */
-    protected $disallowSerialization = false;
+    protected $disallowSerialization = true;
 
     /**
      * HiddenString constructor.
@@ -50,8 +50,8 @@ final class HiddenString
      */
     public function __construct(
         string $value,
-        bool $disallowInline = false,
-        bool $disallowSerialization = false
+        bool $disallowInline = true,
+        bool $disallowSerialization = true
     ) {
         $this->internalStringValue = self::safeStrcpy($value);
         $this->disallowInline = $disallowInline;
