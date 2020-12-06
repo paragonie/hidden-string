@@ -50,7 +50,7 @@ final class HiddenStringTest extends TestCase
             $hidden = new HiddenString($str, $set[0], $set[1]);
 
             \ob_start();
-            \print_r($hidden);
+            \var_dump($hidden);
             $dump = \ob_get_clean();
             echo $dump;
             $this->assertFalse(strpos($dump, $str));
