@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-use ParagonIE\HiddenString\HiddenString;
 use ParagonIE\ConstantTime\Base64UrlSafe;
+use ParagonIE\HiddenString\HiddenString;
+use ParagonIE\HiddenString\MisuseException;
 use PHPUnit\Framework\TestCase;
 
 final class HiddenStringTest extends TestCase
@@ -57,18 +58,18 @@ final class HiddenStringTest extends TestCase
             $print = \print_r($hidden, true);
             $this->assertFalse(strpos($print, $str));
 
-            $cast = (string) $hidden;
-            if ($set[0]) {
-                $this->assertFalse(strpos($cast, $str));
-            } else {
+            try {
+                $cast = (string) $hidden;
                 $this->assertNotFalse(strpos($cast, $str));
+            } catch (MisuseException $ex) {
+                $this->assertTrue($set[0]);
             }
 
-            $serial = serialize($hidden);
-            if ($set[1]) {
-                $this->assertFalse(strpos($serial, $str));
-            } else {
+            try {
+                $serial = serialize($hidden);
                 $this->assertNotFalse(strpos($serial, $str));
+            } catch (MisuseException $ex) {
+                $this->assertTrue($set[1]);
             }
         }
     }
