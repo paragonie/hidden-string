@@ -74,6 +74,9 @@ final class HiddenString
     /**
      * Hide its internal state from var_dump()
      *
+     * Note: The xdebug extension may break this behavior.
+     * You should not rely on it if you have debugging extensions installed.
+     *
      * @return array
      */
     public function __debugInfo()

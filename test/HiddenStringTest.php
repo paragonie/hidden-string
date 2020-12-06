@@ -49,9 +49,9 @@ final class HiddenStringTest extends TestCase
         foreach ($sets as $set) {
             $hidden = new HiddenString($str, $set[0], $set[1]);
 
-            ob_start();
-            var_dump($hidden);
-            $dump = ob_get_clean();
+            \ob_start();
+            \var_dump($hidden);
+            $dump = \ob_get_clean();
             $this->assertFalse(strpos($dump, $str));
 
             $print = \print_r($hidden, true);
