@@ -141,6 +141,12 @@ final class HiddenString
         if (!$this->disallowInline) {
             return self::safeStrcpy($this->internalStringValue);
         }
+
+        if (\PHP_VERSION_ID < 70400) {
+            // Lower PHP versions is not allowed to throw exception
+            return '';
+        }
+
         throw new MisuseException(
             'This HiddenString object cannot be inlined as a string.'
         );
