@@ -58,11 +58,21 @@ final class HiddenStringTest extends TestCase
             $print = \print_r($hidden, true);
             $this->assertFalse(strpos($print, $str));
 
-            try {
-                $cast = (string) $hidden;
-                $this->assertNotFalse(strpos($cast, $str));
-            } catch (MisuseException $ex) {
-                $this->assertTrue($set[0]);
+            if (\PHP_VERSION_ID < 70400) {
+                // Lower PHP versions is not allowed to throw exception
+                $cast = (string)$hidden;
+                if ($set[0]) {
+                    $this->assertEquals('', $cast);
+                } else {
+                    $this->assertNotFalse(strpos($cast, $str));
+                }
+            } else {
+                try {
+                    $cast = (string)$hidden;
+                    $this->assertNotFalse(strpos($cast, $str));
+                } catch (MisuseException $ex) {
+                    $this->assertTrue($set[0]);
+                }
             }
 
             try {
