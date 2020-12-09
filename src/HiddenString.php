@@ -24,21 +24,21 @@ final class HiddenString
     /**
      * @var string
      */
-    protected string $internalStringValue = '';
+    protected $internalStringValue = '';
 
     /**
      * Disallow the contents from being accessed via __toString()?
      *
      * @var bool
      */
-    protected bool $disallowInline = true;
+    protected $disallowInline = true;
 
     /**
      * Disallow the contents from being accessed via __sleep()?
      *
      * @var bool
      */
-    protected bool $disallowSerialization = true;
+    protected $disallowSerialization = true;
 
     /**
      * HiddenString constructor.
