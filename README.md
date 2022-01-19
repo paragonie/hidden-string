@@ -1,6 +1,7 @@
 # HiddenString
 
-[![Build Status](https://travis-ci.org/paragonie/hidden-string.svg?branch=master)](https://travis-ci.org/paragonie/hidden-string)
+[![Build Status](https://github.com/paragonie/hidden-string/actions/workflows/ci.yml/badge.svg)](https://github.com/paragonie/hidden-string/actions)
+[![Psalm Status](https://github.com/paragonie/hidden-string/actions/workflows/static.yml/badge.svg)](https://github.com/paragonie/hidden-string/actions)
 [![Latest Stable Version](https://poser.pugx.org/paragonie/hidden-string/v/stable)](https://packagist.org/packages/paragonie/hidden-string)
 [![Latest Unstable Version](https://poser.pugx.org/paragonie/hidden-string/v/unstable)](https://packagist.org/packages/paragonie/hidden-string)
 [![License](https://poser.pugx.org/paragonie/hidden-string/license)](https://packagist.org/packages/paragonie/hidden-string)
