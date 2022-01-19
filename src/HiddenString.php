@@ -3,6 +3,8 @@ declare(strict_types=1);
 namespace ParagonIE\HiddenString;
 
 use ParagonIE\ConstantTime\Binary;
+use TypeError;
+use function hash_equals;
 
 /**
  * Class HiddenString
@@ -21,22 +23,15 @@ use ParagonIE\ConstantTime\Binary;
  */
 final class HiddenString
 {
-    /**
-     * @var string
-     */
     protected string $internalStringValue = '';
 
     /**
      * Disallow the contents from being accessed via __toString()?
-     *
-     * @var bool
      */
     protected bool $disallowInline = true;
 
     /**
      * Disallow the contents from being accessed via __sleep()?
-     *
-     * @var bool
      */
     protected bool $disallowSerialization = true;
 
@@ -46,7 +41,7 @@ final class HiddenString
      * @param bool $disallowInline
      * @param bool $disallowSerialization
      *
-     * @throws \TypeError
+     * @throws TypeError
      */
     public function __construct(
         string $value,
@@ -60,12 +55,14 @@ final class HiddenString
 
     /**
      * @param HiddenString $other
+     *
      * @return bool
-     * @throws \TypeError
+     *
+     * @throws TypeError
      */
     public function equals(HiddenString $other)
     {
-        return \hash_equals(
+        return hash_equals(
             $this->getString(),
             $other->getString()
         );
@@ -176,7 +173,6 @@ final class HiddenString
     {
         $length = Binary::safeStrlen($string);
         $return = '';
-        /** @var int $chunk */
         $chunk = $length >> 1;
         if ($chunk < 1) {
             $chunk = 1;
