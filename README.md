@@ -8,4 +8,4 @@
 [![Downloads](https://img.shields.io/packagist/dt/paragonie/hidden-string.svg)](https://packagist.org/packages/paragonie/hidden-string)
 
 This package extracts the HiddenString class originally used in [Halite](https://github.com/paragonie/halite).
-**Requires PHP 7.**
+**Requires PHP 7 or newer.**

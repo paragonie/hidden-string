@@ -18,7 +18,7 @@
   ],
   "require": {
     "php": "^7.4|^8",
-    "paragonie/constant_time_encoding": "^2"
+    "paragonie/constant_time_encoding": "^2|^3"
   },
   "autoload": {
     "psr-4": {

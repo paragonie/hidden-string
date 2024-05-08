@@ -50,6 +50,7 @@ final class HiddenString
      * @throws TypeError
      */
     public function __construct(
+        #[\SensitiveParameter]
         string $value,
         bool $disallowInline = true,
         bool $disallowSerialization = true
@@ -181,8 +182,10 @@ final class HiddenString
      *
      * @throws TypeError
      */
-    public static function safeStrcpy(string $string): string
-    {
+    public static function safeStrcpy(
+        #[\SensitiveParameter]
+        string $string
+    ): string {
         $length = Binary::safeStrlen($string);
         $return = '';
         $chunk = $length >> 1;
